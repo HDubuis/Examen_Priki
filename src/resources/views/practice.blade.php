@@ -14,6 +14,12 @@
             </div>
         </a>
 
+        @if (Auth::check())
+            <a href="{{ route('edit/practice', ['practice' => $practice->id]) }}"
+               class="py-2 px-4 bg-purple-500 hover:bg-purple-600 rounded shadow shadow-purple-300 text-white duration-300">
+               Editer
+            </a>
+        @endif
         <!--- Practice -->
         <div>
             <p class="my-4 text-lg">{{ $practice->description }}</p>
@@ -38,7 +44,7 @@
 
         <livewire:practice.opinions :practice="$practice"/>
 
-        @if (\Illuminate\Support\Facades\Auth::check())
+        @if (Auth::check())
             <livewire:show-changelogs :practice="$practice"/>
         @endif
 

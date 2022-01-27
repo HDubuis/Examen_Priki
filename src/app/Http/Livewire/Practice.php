@@ -13,4 +13,5 @@ class Practice extends Component
     {
         return view('livewire.practice');
     }
+
 }
