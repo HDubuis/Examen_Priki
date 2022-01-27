@@ -18,6 +18,10 @@ class PracticeSeeder extends Seeder
      */
     public function run()
     {
+        $i = 0;
+        $table = [ "YAGNI", "Ne pas tester les tests","Le bon moment","API simples","Echec rapide","Test unitaires","Chemins","Le code est l'ennemi","Les mensonges",
+        "Écrivez défensif","Pas d'effets de bord","Les globaux sont mauvais","Types intégrés","Injection de dépendances","Peu de simulations","API externes","30 lignes max",
+            "Pas de job dans les constructeurs","DRY","Refactorisez souvent","D'abord juste, efficace après"];
         // Real practices
         foreach ([
             "YAGNI : \"You Aint Gonna Need It\". N'écrivez pas de code dont vous pensez avoir besoin dans le futur, mais dont vous n'avez pas encore besoin. Il s'agit de coder pour des cas d'utilisation futurs imaginaires, et inévitablement le code deviendra du code mort ou devra être réécrit parce que le cas d'utilisation futur s'avère toujours fonctionner légèrement différemment de la façon dont vous l'avez imaginé.",
@@ -44,14 +48,16 @@ class PracticeSeeder extends Seeder
         ] as $practice) {
             Practice::create([
                 'description'          => $practice,
+                'title'                => $table[$i],
                 'domain_id'            => Domain::all()->random()->id,
                 'publication_state_id' => PublicationState::all()->random()->id,
                 'user_id'              => User::all()->random()->id,
                 'updated_at'           => Carbon::now()->subMinutes(rand(1, 5 * 24 * 60))
             ]);
+            $i++;
         }
 
         // and a few fake ones
-        Practice::factory(30)->create();
+        //Practice::factory(30)->create();
     }
 }

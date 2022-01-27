@@ -4,16 +4,22 @@
         <a href="{{ route('practices.byDomain', ['domain' => $practice->domain->slug]) }}" class="group inline-block">
             <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="md:h-12 w-0 md:group-hover:w-12 duration-500" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
+                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                          d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
                 </svg>
                 <!--- Split line -->
                 <div class="my-2 self-stretch border-purple-500 group-hover:border-l-4 duration-100"></div>
-                <h1 class="text-6xl font-bold uppercase duration-500">{{ $practice->domain->name }}</h1>
+                <h1 class="text-6xl font-bold uppercase duration-500">{{ $practice->title }}</h1>
             </div>
         </a>
 
+        @if (Auth::check())
+            <a href="{{ route('edit/practice', ['practice' => $practice->id]) }}"
+               class="py-2 px-4 bg-purple-500 hover:bg-purple-600 rounded shadow shadow-purple-300 text-white duration-300">
+               Editer
+            </a>
+        @endif
         <!--- Practice -->
         <div>
             <p class="my-4 text-lg">{{ $practice->description }}</p>
@@ -31,12 +37,16 @@
                 </div>
             @endcan
             <a href="#"
-                class="inline-block mr-1 my-1 px-2 py-1 bg-purple-200 rounded-md shadow shadow-purple-300 text-purple-500 hover:text-purple-600 duration-300">
+               class="inline-block mr-1 my-1 px-2 py-1 bg-purple-200 rounded-md shadow shadow-purple-300 text-purple-500 hover:text-purple-600 duration-300">
                 <span>{{ $practice->user->fullname }}</span>
             </a>
         </div>
 
-        <livewire:practice.opinions :practice="$practice" />
+        <livewire:practice.opinions :practice="$practice"/>
+
+        @if (Auth::check())
+            <livewire:show-changelogs :practice="$practice"/>
+        @endif
 
     </div>
 </x-app-layout>

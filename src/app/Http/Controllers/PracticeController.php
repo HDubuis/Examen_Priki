@@ -27,6 +27,16 @@ class PracticeController extends Controller
         return view('practices')->with('domain', $domain);
     }
 
+    public function edit(Practice $practice)
+    {
+        return view('practice-edit-title')->with('practice',$practice);
+    }
+
+    public function edited(Practice $practice)
+    {
+        return view('practice')->with('practice',$practice);
+    }
+
     public function moderation()
     {
         return view('practices-moderation');

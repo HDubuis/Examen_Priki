@@ -25,7 +25,10 @@ Route::prefix('/practices')->group(function () {
     Route::get('/moderation', [PracticeController::class, 'moderation'])->name('practices.moderation')->can('moderate');
     Route::get('/domain/{domain:slug}', [PracticeController::class, 'byDomain'])->name('practices.byDomain');
     Route::get('/{practice}', [PracticeController::class, 'index'])->name('practice')->can('view', 'practice');
+    Route::get('edit/{practice}', [PracticeController::class, 'edit'])->name('edit/practice');
+    Route::post('edit/{practice}/title',[PracticeController::class, 'edited'])->name('edit/practice/title');
 });
+
 
 Route::get('/references', [ReferenceController::class, 'index'])->name('references');
 
