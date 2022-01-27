@@ -14,7 +14,7 @@ class AddTittleToPracticesTable extends Migration
     public function up()
     {
         Schema::table('practices', function (Blueprint $table) {
-            $table->integer('title');
+            $table->string('title');
         });
     }
 
