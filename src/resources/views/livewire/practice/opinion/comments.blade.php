@@ -9,7 +9,6 @@
             </svg>
         </span>
     </button>
-
     <div class="accordion-content {{ $isOpen ? null : 'hidden' }}
      px-4 divide-y-4 divide-gray-200">
         @foreach ($comments as $comment)

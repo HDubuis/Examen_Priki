@@ -15,24 +15,24 @@ class Practice extends Model
         return $this->belongsTo(Domain::class);
     }
 
-    public function publicationState()
-    {
-        return $this->belongsTo(publicationState::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function opinions()
+    public function changelog()
     {
-        return $this->hasMany(Opinion::class);
+        return $this->hasMany(Changelogs::class);
     }
 
     public function opinionOf(User $user): ?Opinion
     {
         return $this->opinions()->where('user_id', $user->id)->first();
+    }
+
+    public function opinions()
+    {
+        return $this->hasMany(Opinion::class);
     }
 
     public function scopeUpdatedSince($query, string $days)
@@ -42,18 +42,23 @@ class Practice extends Model
 
     public function scopeOfDomain($query, string $domain)
     {
-        return $query->whereHas('domain', fn ($q) => $q->where('slug', $domain));
+        return $query->whereHas('domain', fn($q) => $q->where('slug', $domain));
     }
 
     public function scopePublished($query)
     {
-        return $query->whereHas('publicationState', fn ($q) => $q->where('slug', 'PUB'));
+        return $query->whereHas('publicationState', fn($q) => $q->where('slug', 'PUB'));
     }
 
     public function publish()
     {
         $this->publicationState()->associate(PublicationState::where('slug', 'PUB')->first());
         $this->save();
+    }
+
+    public function publicationState()
+    {
+        return $this->belongsTo(publicationState::class);
     }
 
     public function isPublished(): bool
