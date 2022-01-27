@@ -10,7 +10,7 @@
                 </svg>
                 <!--- Split line -->
                 <div class="my-2 self-stretch border-purple-500 group-hover:border-l-4 duration-100"></div>
-                <h1 class="text-6xl font-bold uppercase duration-500">{{ $practice->domain->name }}</h1>
+                <h1 class="text-6xl font-bold uppercase duration-500">{{ $practice->title }}</h1>
             </div>
         </a>
 
